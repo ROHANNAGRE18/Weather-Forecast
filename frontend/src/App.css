@@ -1,0 +1,19 @@
+/* App.css — intentionally minimal. All styling uses CSS variables from index.css and inline styles/Tailwind. */
+
+/* Pulse keyframe used by AICard skeleton rows */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Blink used by BackgroundEffect star twinkle */
+@keyframes blink {
+  0%, 100% { opacity: 0.8; }
+  50%       { opacity: 0.05; }
+}
+
+/* Spin for loader icons */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
