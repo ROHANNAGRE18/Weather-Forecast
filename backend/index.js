@@ -41,34 +41,49 @@ app.post("/api/ai-suggestions", async (req, res) => {
           properties: {
             clothing: {
               type: "STRING",
-              description: "Detailed outfit advice: what to wear top to bottom, fabrics, layers, accessories like hat/scarf/sunglasses. 2-3 sentences."
+              description:
+                "Detailed outfit advice: what to wear top to bottom, fabrics, layers, accessories like hat/scarf/sunglasses. 2-3 sentences.",
             },
             food_drink: {
               type: "STRING",
-              description: "What to eat and drink — warm/cool foods, hydration tips, comfort foods suited to the weather. 2-3 sentences."
+              description:
+                "What to eat and drink — warm/cool foods, hydration tips, comfort foods suited to the weather. 2-3 sentences.",
             },
             activity: {
               type: "STRING",
-              description: "Best outdoor or indoor activities suited to this weather, and the ideal time of day to go out. 2-3 sentences."
+              description:
+                "Best outdoor or indoor activities suited to this weather, and the ideal time of day to go out. 2-3 sentences.",
             },
             health: {
               type: "STRING",
-              description: "Health tips: allergies, UV exposure, hydration needs, respiratory concerns, or cold/heat-related advice. 2-3 sentences."
+              description:
+                "Health tips: allergies, UV exposure, hydration needs, respiratory concerns, or cold/heat-related advice. 2-3 sentences.",
             },
             travel: {
               type: "STRING",
-              description: "Travel and commute tips: road conditions, visibility, traffic, whether to drive or use public transport. 2-3 sentences."
+              description:
+                "Travel and commute tips: road conditions, visibility, traffic, whether to drive or use public transport. 2-3 sentences.",
             },
             home: {
               type: "STRING",
-              description: "Home environment tips: whether to open windows, use AC/heating, humidity control, or energy saving advice. 2-3 sentences."
+              description:
+                "Home environment tips: whether to open windows, use AC/heating, humidity control, or energy saving advice. 2-3 sentences.",
             },
             precautions: {
               type: "STRING",
-              description: "Key safety precautions and warnings based on the weather — lightning, flooding, heatstroke, frostbite risk, etc. 2-3 sentences."
+              description:
+                "Key safety precautions and warnings based on the weather — lightning, flooding, heatstroke, frostbite risk, etc. 2-3 sentences.",
             },
           },
-          required: ["clothing", "food_drink", "activity", "health", "travel", "home", "precautions"],
+          required: [
+            "clothing",
+            "food_drink",
+            "activity",
+            "health",
+            "travel",
+            "home",
+            "precautions",
+          ],
         },
       },
     });
@@ -95,7 +110,4 @@ app.post("/api/ai-suggestions", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`Backend server running on http://localhost:${PORT}`),
-);
+export default app;
