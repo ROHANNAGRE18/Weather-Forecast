@@ -74,7 +74,8 @@ export default function SearchBar({ onSearch, isHome = false, theme, embedded = 
         gap: "0.6rem",
         width: "100%",
         maxWidth: isHome ? "560px" : "100%",
-        margin: isHome ? "0 auto" : "0 0 1.25rem",
+        margin: isHome ? "0 auto" : "0",
+        alignItems: "center",
       }}
     >
       {/* Input wrapper */}

@@ -24,8 +24,8 @@ const FEATURES = [
     icon: <Sparkles className="w-6 h-6" />,
     color: "#8b5cf6",
     bg: "rgba(139,92,246,0.12)",
-    title: "Gemini AI Insights",
-    desc: "Personalised lifestyle tips powered by Google Gemini — what to wear, eat, and watch out for.",
+    title: "AI Insights",
+    desc: "Personalised lifestyle tips powered by AI — what to wear, eat, and watch out for.",
   },
   {
     icon: <Wind className="w-6 h-6" />,
@@ -153,7 +153,7 @@ function HomePage({ onSearch, theme }) {
             margin: "0 auto 2.5rem",
           }}
         >
-          Real-time weather for any city on earth, paired with Gemini AI lifestyle
+          Real-time weather for any city on earth, paired with AI lifestyle
           tips — so you always step out perfectly prepared.
         </motion.p>
 
@@ -246,14 +246,17 @@ function HomePage({ onSearch, theme }) {
             custom={i}
             whileHover={{ y: -6, scale: 1.02 }}
             style={{
-              background: isDark ? "rgba(30,41,59,0.6)" : "rgba(255,255,255,0.7)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: `1px solid ${isDark ? "rgba(148,163,184,0.12)" : "rgba(59,130,246,0.15)"}`,
+              background: isDark ? "rgba(30,41,59,0.6)" : "#ffffff",
+              backdropFilter: isDark ? "blur(20px)" : "none",
+              WebkitBackdropFilter: isDark ? "blur(20px)" : "none",
+              border: `1.5px solid ${isDark ? "rgba(148,163,184,0.12)" : "rgba(59,130,246,0.12)"}`,
               borderRadius: "1.25rem",
               padding: "1.75rem",
               cursor: "default",
               transition: "box-shadow 0.3s",
+              boxShadow: isDark
+                ? "0 4px 20px rgba(0,0,0,0.3)"
+                : "0 2px 8px rgba(59,130,246,0.06), 0 8px 24px rgba(59,130,246,0.08)",
             }}
           >
             <div
@@ -302,8 +305,9 @@ function HomePage({ onSearch, theme }) {
           padding: "2.5rem",
           background: isDark
             ? "linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.15) 100%)"
-            : "linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.08) 100%)",
-          border: `1px solid ${isDark ? "rgba(59,130,246,0.25)" : "rgba(59,130,246,0.2)"}`,
+            : "linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%)",
+          border: `1.5px solid ${isDark ? "rgba(59,130,246,0.25)" : "rgba(59,130,246,0.15)"}`,
+          boxShadow: isDark ? "none" : "0 4px 24px rgba(59,130,246,0.08)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -328,7 +332,7 @@ function HomePage({ onSearch, theme }) {
 
       {/* Footer */}
       <p style={{ color: "var(--text-muted)", fontSize: "0.78rem", paddingBottom: "2rem" }}>
-        Built with React · OpenWeatherMap · Google Gemini AI
+        Built with React · OpenWeatherMap · AI Suggestions
       </p>
     </motion.div>
   );
@@ -358,7 +362,7 @@ function ResultsPage({ weather, aiSuggestions, aiLoading, error, onBack, theme, 
             alignItems: "center",
             gap: "1rem",
             marginBottom: "1.75rem",
-            flexWrap: "wrap",
+            flexWrap: "nowrap",
           }}
         >
           <motion.button
@@ -370,8 +374,8 @@ function ResultsPage({ weather, aiSuggestions, aiLoading, error, onBack, theme, 
               display: "inline-flex",
               alignItems: "center",
               gap: "6px",
-              background: "none",
-              border: `1px solid var(--border-color)`,
+              background: "var(--bg-card)",
+              border: `1.5px solid var(--border-color)`,
               borderRadius: "0.6rem",
               color: "var(--text-secondary)",
               fontSize: "0.85rem",
@@ -381,6 +385,7 @@ function ResultsPage({ weather, aiSuggestions, aiLoading, error, onBack, theme, 
               transition: "all 0.2s",
               whiteSpace: "nowrap",
               backdropFilter: "blur(8px)",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "var(--accent-blue)";
@@ -395,7 +400,7 @@ function ResultsPage({ weather, aiSuggestions, aiLoading, error, onBack, theme, 
           </motion.button>
 
           {/* Compact search bar fills remaining width */}
-          <div style={{ flex: 1, minWidth: "220px" }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <SearchBar isHome={false} theme={theme} onSearch={onSearch} embedded />
           </div>
         </div>
@@ -456,11 +461,7 @@ function ResultsPage({ weather, aiSuggestions, aiLoading, error, onBack, theme, 
 
 // ── Root App ─────────────────────────────────────────────────────
 export default function App() {
-  const [theme, setTheme] = useState(() =>
-    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark"
-  );
+  const [theme, setTheme] = useState("light");
   const [page, setPage] = useState("home"); // "home" | "results"
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
